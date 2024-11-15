@@ -1,77 +1,86 @@
-##Background
-SpaceX, a leader in the space industry, strives to make space travel affordable for everyone. Its accomplishments include sending spacecraft to the international space station, launching a satellite constellation that provides internet access and sending manned missions to space. SpaceX can do this because the rocket launches are relatively inexpensive ($62 million per launch) due to its novel reuse of the first stage of its Falcon 9 rocket. Other providers, which are not able to reuse the first stage, cost upwards of $165 million each. By determining if the first stage will land, we can determine the price of the launch. To do this, we can use public data and machine learning models to predict whether SpaceX – or a competing company – can reuse the first stage.
+# 🚀 SpaceX Rocket Landing Success Prediction
 
-Explore
-How payload mass, launch site, number of flights, and orbits affect first-stage landing success
-Rate of successful landings over time
-Best predictive model for successful landing (binary classification)
-Executive Summary
-The research attempts to identify the factors for a successful rocket landing. To make this determination, the following methodologies where used:
+## **Background**
+SpaceX, a leader in the space industry, aims to make space travel affordable for everyone.  
+Its key accomplishments include:
+- Sending spacecraft to the International Space Station.
+- Launching a satellite constellation for global internet access.
+- Conducting manned space missions.  
 
-Collect data using SpaceX REST API and web scraping techniques
-Wrangle data to create success/fail outcome variable
-Explore data with data visualization techniques, considering the following factors: payload, launch site, flight number and yearly trend
-Analyze the data with SQL, calculating the following statistics: total payload, payload range for successful launches, and total # of successful and failed outcomes
-Explore launch site success rates and proximity to geographical markers
-Visualize the launch sites with the most success and successful payload ranges
-Build Models to predict landing outcomes using logistic regression, support vector machine (SVM), decision tree and K-nearest neighbor (KNN)
-Results
-Exploratory Data Analysis:
-Launch success has improved over time
-KSC LC-39A has the highest success rate among landing sites
-Orbits ES-L1, GEO, HEO, and SSO have a 100% success rate
-Visualization / Analytics:
-Most launch sites are near the equator, and all are close to the coast
-Predictive Analytics
-All models performed similarly on the test set. The decision tree model slightly outperformed when looking at .best_score_
-Methodology
-Data Collection - API
-Request data from SpaceX API (rocket launch data)
-Decode response using .json() and convert to a dataframe using .json_normalize()
-Request information about the launches from SpaceX API using custom functions
-Create dictionary from the data
-Create dataframe from the dictionary
-Filter dataframe to contain only Falcon 9 launches
-Replace missing values of Payload Mass with calculated .mean()
-Export data to csv file
-Data Collection - Web Scraping
-Request data (Falcon 9 launch data) from Wikipedia
-Create BeautifulSoup object from HTML response
-Extract column names from HTML table header
-Collect data from parsing HTML tables
-Create dictionary from the data
-Create dataframe from the dictionary
-Export data to csv file
-Data Wrangling
-Convert outcomes into 1 for a successful landing and 0 for an unsuccessful landing
-EDA with Visualization
-Create charts to analyze relationships and show comparisons
-EDA with SQL
-Query the data to understand more about the data
-Maps with Folium
-Create maps to visualize launch sites, view launch outcomes and see distance to proximities
-Dashboard with Plotly Dash
-Create dashboard
-Pie chart showing successful launches
-Scatter chart showing Payload Mass vs. Success Rate by Booster Version
-Predictive Analytics
-Create NumPy array from the Class column
-Standardize the data with StandardScaler. Fit and transform the data.
-Split the data using train_test_split
-Create a GridSearchCV object with cv=10 for parameter optimization
-Apply GridSearchCV on different algorithms: logistic regression (LogisticRegression()), support vector machine (SVC()), decision tree (DecisionTreeClassifier()), K-Nearest Neighbor (KNeighborsClassifier())
-Calculate accuracy on the test data using .score() for all models
-Assess the confusion matrix for all models
-Identify the best model using Jaccard_Score, F1_Score and Accuracy
-Conclusion
-Model Performance: The models performed similarly on the test set with the decision tree model slightly outperforming
-Equator: Most of the launch sites are near the equator for an additional natural boost - due to the rotational speed of earth - which helps save the cost of putting in extra fuel and boosters
-Coast: All the launch sites are close to the coast
-Launch Success: Increases over time
-KSC LC-39A: Has the highest success rate among launch sites. Has a 100% success rate for launches less than 5,500 kg
-Orbits: ES-L1, GEO, HEO, and SSO have a 100% success rate
-Payload Mass: Across all launch sites, the higher the payload mass (kg), the higher the success rate
-Additional Things to Consider
-Dataset: A larger dataset will help build on the predictive analytics results to help understand if the findings can be generalizable to a larger data set
-Feature Analysis / PCA: Additional feature analysis or principal component analysis should be conducted to see if it can help improve accuracy
-XGBoost: Is a powerful model which was not utilized in this study. It would be interesting to see if it outperforms the other classification models
+SpaceX achieves cost efficiency by reusing the first stage of its Falcon 9 rockets, reducing launch costs to $62 million compared to $165 million for competitors. Using public data and machine learning models, this project predicts the success of first-stage landings, providing insights into launch costs.
+
+---
+
+## **Research Goals**
+1. Explore the relationship between payload mass, launch site, number of flights, orbits, and first-stage landing success.  
+2. Analyze the rate of successful landings over time.  
+3. Identify the best predictive model for binary classification of successful landings.
+
+---
+
+## **Executive Summary**
+This project identifies factors contributing to a successful rocket landing through:
+- **Data Collection:** Using the SpaceX REST API and web scraping.  
+- **Data Wrangling:** Creating a success/fail outcome variable.  
+- **Exploratory Data Analysis (EDA):** Visualizing trends by payload, launch sites, and time.  
+- **SQL Analytics:** Calculating payload statistics, success rates, and launch site proximity analysis.  
+- **Model Building:** Comparing logistic regression, SVM, decision trees, and KNN.
+
+---
+
+## **Results**
+
+### **Exploratory Data Analysis (EDA):**
+- Launch success has improved over time.  
+- KSC LC-39A has the highest success rate among launch sites.  
+- Orbits ES-L1, GEO, HEO, and SSO have a 100% success rate.
+
+### **Visualization and Analytics:**
+- Most launch sites are near the equator and close to the coast.
+
+### **Predictive Analytics:**
+- All models performed similarly on the test set.  
+- The decision tree model slightly outperformed others in terms of accuracy.
+
+---
+
+## **Methodology**
+
+### **Data Collection - SpaceX API:**
+1. Request rocket launch data using SpaceX API.  
+2. Convert responses to DataFrame using `.json()` and `.json_normalize()`.  
+3. Filter for Falcon 9 launches.  
+4. Handle missing payload values using the mean.  
+5. Export the data to a CSV file.
+
+### **Data Collection - Web Scraping:**
+1. Scrape Falcon 9 launch data from Wikipedia using BeautifulSoup.  
+2. Parse HTML tables and extract relevant data.  
+3. Convert data to a DataFrame and export it to CSV.
+
+### **Data Wrangling:**
+- Convert outcomes into binary values (1 for success, 0 for failure).
+
+### **EDA with Visualization:**
+- Create charts to analyze relationships and show comparisons.
+
+### **EDA with SQL:**
+- Query data for insights such as total payloads and success rates.
+
+### **Maps with Folium:**
+- Visualize launch sites, outcomes, and distances to proximities.
+
+### **Dashboard with Plotly Dash:**
+- **Pie Chart:** Displays successful launches by site.  
+- **Scatter Plot:** Payload Mass vs. Success Rate by Booster Version.
+
+### **Predictive Analytics:**
+1. Prepare data with `StandardScaler` and split into training/testing sets.  
+2. Use `GridSearchCV` with 10-fold cross-validation for optimization.  
+3. Evaluate models (Logistic Regression, SVM, Decision Tree, KNN) using:
+   - **Jaccard Score**
+   - **F1 Score**
+   - **Accuracy**
+
+---
+
